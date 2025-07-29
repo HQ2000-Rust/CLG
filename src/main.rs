@@ -1,5 +1,6 @@
-mod command_processing;
+mod parsing;
 mod gambling;
+mod commands;
 
 use clap::Parser;
 use command_processing::Cli;
