@@ -2,5 +2,15 @@
 name = "clg"
 version = "0.1.0"
 edition = "2024"
+authors = ["Jonathan Schmittat"]
+publish = false
 
 [dependencies]
+crossterm="0.29.0"
+ratatui="0.29.0"
+color-eyre="0.6.5"
+
+[dependencies.clap]
+version = "4.5.41"
+default-features = false
+features = ["derive","help","color","cargo","std"]
