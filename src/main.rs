@@ -3,7 +3,7 @@ mod gambling;
 mod commands;
 
 use clap::Parser;
-use command_processing::Cli;
+use parsing::Cli;
 
 fn main() {
     let cli = Cli::parse();
