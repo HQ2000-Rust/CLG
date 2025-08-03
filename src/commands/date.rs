@@ -1,3 +1,5 @@
+use color_eyre::owo_colors::OwoColorize;
+
 pub fn date() -> Option<String> {
-    Some(format!("{}", chrono::Local::now()))
+    Some(chrono::Local::now().bold().to_string())
 }
