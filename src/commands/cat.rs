@@ -1,3 +1,4 @@
+use crossterm::style::Stylize;
 use std::fmt::Error;
 use std::fs::{File, read_dir};
 use std::io::{BufReader, ErrorKind, Read};
@@ -15,11 +16,17 @@ pub fn cat(file_paths: Vec<PathBuf>) -> Result<Option<String>, std::io::Error> {
         reader.read_to_string(&mut content)?;
         let file_name = file_path
             .file_name()
-            .expect("File name needs to be a valid string")
+            .expect("not a valid path")
             .to_string_lossy()
             .into_owned();
-        result.push_str(&[file_name, content].join("\n"));
-        drop(reader);
+        //ugly, but I want the "header" to be bold
+        result.push_str(
+            &[
+                format!("Contents of {}:", file_name).bold().to_string(),
+                format!("\n{}\n", content),
+            ]
+            .join(""),
+        );
     }
     Ok(Some(result))
 }
