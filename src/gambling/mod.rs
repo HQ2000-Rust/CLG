@@ -1,5 +1,9 @@
 mod coinflip;
-pub mod gamble_result;
+mod gamble_result;
+mod utils;
+mod ascii_art;
+
+pub use gamble_result::GambleResult;
 
 use coinflip::coinflip;
 use rand::random;
@@ -9,4 +13,3 @@ pub fn rand_gamble_with_difficulty(difficulty: u8) -> GambleResult {
         _ => unreachable!(),
     }
 }
-
