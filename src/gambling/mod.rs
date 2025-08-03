@@ -1,6 +1,5 @@
 mod coinflip;
 mod gamble_result;
-mod utils;
 mod ascii_art;
 
 pub use gamble_result::GambleResult;
