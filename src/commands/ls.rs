@@ -10,9 +10,9 @@ pub fn ls() -> Result<Option<String>, std::io::Error> {
         result.push(entry.file_name());
     }
     let result = result
-        .join("   ".into())
-        .to_str()
-        .expect("dirnames are expected to be displayable as UTF-8 for the entire tool to work")
-        .to_string();
+        .iter()
+        .map(|os_string| os_string.to_string_lossy())
+        .collect::<Vec<_>>()
+        .join("   ");
     Ok(Some(result))
 }
