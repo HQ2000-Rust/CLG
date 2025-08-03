@@ -1,14 +1,28 @@
-mod utils;
-
 mod ls;
 pub use ls::ls;
 mod cat;
 pub use cat::cat;
-mod sleep;
-mod getconf;
 mod date;
 pub use date::date;
-
+mod dirname;
+pub use dirname::dirname;
+mod getconf;
 pub use getconf::getconf;
-
+mod rm;
+pub use rm::rm;
+mod sleep;
 pub use sleep::sleep;
+mod rmdir;
+pub use rmdir::rmdir;
+mod echo;
+pub use echo::echo;
+mod file;
+pub use file::file;
+mod cut;
+pub use cut::cut;
+mod mkdir;
+pub use mkdir::mkdir;
+mod wc;
+pub use wc::wc;
+mod cp;
+pub use cp::cp;
