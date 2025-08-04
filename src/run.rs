@@ -16,7 +16,7 @@ pub fn run(cli: Cli) -> std::io::Result<()> {
     let gambling_result = crate::gambling::rand_gamble_with_difficulty(
         cli.difficulty
             .expect("Optional, but it has a default value"),
-    );
+    )?;
 
     if !gambling_result.is_failure() {
         let output = match cmd {
