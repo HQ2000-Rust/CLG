@@ -1,14 +1,14 @@
-mod coinflip;
-mod gamble_result;
 mod ascii_art;
+mod coinflip;
+mod utils;
 
-pub use gamble_result::GambleResult;
+pub use utils::GambleResult;
 
 use coinflip::coinflip;
-use rand::random;
-pub fn rand_gamble_with_difficulty(difficulty: u8) -> GambleResult {
-    match random::<u32>() % 1 {
-        0 => coinflip(difficulty),
+use fastrand;
+pub fn rand_gamble_with_difficulty(difficulty: u8) -> std::io::Result<GambleResult> {
+    Ok(match fastrand::u8(..1) {
+        0 => coinflip(difficulty)?,
         _ => unreachable!(),
-    }
+    })
 }
