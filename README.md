@@ -22,8 +22,8 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 
 ## Options
 -   -d, --difficulty <Number from 1 to 100>  [default: 1]
--   -h, --help                               Print help
--   -V, --version                            Print version
+-   -h, --help - Print help
+-   -V, --version - Print version
 
 ## Setup
 1. Download the latest release for your OS/arch like windows-x86-64
