@@ -4,10 +4,10 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 
 ## Commands
 > this is the same as if you would run the --help flag alongside this CLI
-  - cat      concatenate and display files
-  - cp       copy a file
-  - cut      only show a certain range for each line
-  - date     display the local date and time
+  - cat  concatenate and display files
+  - cp  copy a file
+  - cut  only show a certain range for each line
+  - date  display the local date and time
   - dirname  display the name of the current directory
   - echo     output formatted text and access special variables
   - file     display the MIME type of a file
