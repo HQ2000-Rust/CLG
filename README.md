@@ -2,8 +2,9 @@
 No idea how original it is (I hope so), but basically your luck determines if and how the commands you type are executed.
 Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 
-## Commands
+## Usage
 > this is the same as if you would run the --help flag alongside this CLI
+  ### Commands
   - cat - concatenate and display files
   - cp - copy a file
   - cut - only show a certain range for each line
