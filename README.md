@@ -4,21 +4,21 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 
 ## Commands
 > this is the same as if you would run the --help flag alongside this CLI
-  - cat  concatenate and display files
-  - cp  copy a file
-  - cut  only show a certain range for each line
-  - date  display the local date and time
-  - dirname  display the name of the current directory
-  - echo     output formatted text and access special variables
-  - file     display the MIME type of a file
-  - getconf  get the configuration options
-  - ls       list all files and directories in the current directory
-  - mkdir    create a directory
-  - rm       remove one or more files
-  - rmdir    remove one or more directories
-  - sleep    pause the execution of the program
-  - wc       display word, byte and newline counts
-  - help     Print this message or the help of the given subcommand(s)
+  - cat - concatenate and display files
+  - cp - copy a file
+  - cut - only show a certain range for each line
+  - date -   display the local date and time
+  - dirname - display the name of the current directory
+  - echo - output formatted text and access special variables
+  - file - display the MIME type of a file
+  - getconf - get the configuration options
+  - ls - list all files and directories in the current directory
+  - mkdir - create a directory
+  - rm - remove one or more files
+  - rmdir - remove one or more directories
+  - sleep - pause the execution of the program
+  - wc - display word, byte and newline counts
+  - help - Print this message or the help of the given subcommand(s)
 
 ## Options
 -   -d, --difficulty <Number from 1 to 100>  [default: 1]
