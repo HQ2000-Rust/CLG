@@ -29,7 +29,7 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 1. Download the latest release for your OS/arch like windows-x86-64
 > If you don't find your OS and arch in the latest release, compile it (see **Compilation**
 2. Put it into your desired directory with sufficient permissions (A "Playground" where you can safely delete or make new files and directories)
-> You can optionally add it to the path, even though I would bot recommend it because of its missing suitability
+> You can optionally add it to the path, even though I would not recommend it because of its missing suitability
 3. Run the executable (.\CLG.exe on windows, ./CLG.exe on linux.bin, etc)<!-- check this later -->
 > 4. **Finished!**
 
