@@ -30,16 +30,14 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 > If you don't find your OS and arch in the latest release, compile it (see **Compilation**
 2. Put it into your desired directory with sufficient permissions (A "Playground" where you can safely delete or make new files and directories)
 > You can optionally add it to the path, even though I would not recommend it because of its missing suitability
-3. Run the executable (.\CLG.exe on windows, ./CLG.exe on linux.bin, etc)<!-- check this later -->
+3. Run the executable `clgambling`
 > 4. **Finished!**
 
 ## Compilation
-1. Download this repository
-2. Install Rust via Rustup if you haven't already installed it
-3. Run `cargo install CLG`
-4. Run it as above stated
+1. Run `cargo install clgambling`
+2. Run it as above stated
 
 ## Safety
 - This is a CLI tool that contains commands like `rmdir` or `rm` which can unrecoverably delete potentially important/valueable files, depending on your OS (see the trash bin).
-- Fortunately, you can only delete an empty directory / one file at at time, so actually causing any accidental damage is mostly **very unlikely**
+- Fortunately, you can only delete an empty directory or need to give the `rm` a complete list of the files to be deleted, so actually causing any accidental damage is mostly **very unlikely** 
 - That mentioned, please only use this tool carefully, Control-C is always acceptable
