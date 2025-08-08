@@ -3,7 +3,7 @@ No idea how original it is (I hope so), but basically your luck determines if an
 Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 
 ## Usage
-> this is the same as if you would run the --help flag alongside this CLI
+> this is the same output as if you would run the --help flag alongside this CLI
   ### Commands
   - cat - concatenate and display files
   - cp - copy a file
