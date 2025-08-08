@@ -1,14 +1,23 @@
-use std::fmt::Display;
-use std::fs::File;
-use std::io::Write;
-use std::path::Path;
+use std::time::Instant;
+
+#[derive(Debug)]
+pub struct LastChange {
+    pub inner: Instant,
+}
+
+impl Default for LastChange {
+    fn default() -> LastChange {
+        LastChange {
+            inner: Instant::now(),
+        }
+    }
+}
 
 #[derive(Eq, PartialEq, Copy, Clone, Debug, Default)]
 pub enum AnimStatus {
     #[default]
     Unitialized,
     Ongoing,
-    Stopped,
     Finished,
 }
 
@@ -19,25 +28,17 @@ impl AnimStatus {
     pub fn is_ongoing(&self) -> bool {
         *self == AnimStatus::Ongoing
     }
-    pub fn is_stopped(&self) -> bool {
-        *self == AnimStatus::Stopped
-    }
     pub fn is_finished(&self) -> bool {
         *self == AnimStatus::Finished
     }
     pub fn start(&mut self) {
-        if self.is_uninit() || self.is_stopped() {
+        if self.is_uninit() {
             *self = AnimStatus::Ongoing;
         }
     }
-    pub fn stop(&mut self) {
-        if self.is_ongoing() {
-            *self = AnimStatus::Stopped;
-        }
-    }
-    pub fn finished(&mut self) {
+    pub fn finish(&mut self) {
         //stopped also to avoid conflicts
-        if self.is_ongoing() || self.is_stopped() {
+        if self.is_ongoing() {
             *self = AnimStatus::Finished;
         }
     }
@@ -46,7 +47,6 @@ impl AnimStatus {
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum GambleResult {
     Success,
-    PartialSuccess,
     Failure,
 }
 
@@ -61,13 +61,7 @@ impl From<bool> for GambleResult {
 }
 
 impl GambleResult {
-    pub fn is_success(&self) -> bool {
-        *self == GambleResult::Success
-    }
     pub fn is_failure(&self) -> bool {
         *self == GambleResult::Failure
-    }
-    pub fn is_partial_success(&self) -> bool {
-        *self == GambleResult::PartialSuccess
     }
 }
