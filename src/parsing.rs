@@ -1,4 +1,3 @@
-use crossterm::style::Stylize;
 use std::path::PathBuf;
 
 use clap::{Parser, Subcommand};
@@ -7,16 +6,6 @@ use clap::{Parser, Subcommand};
 #[clap(author, version, about, long_about = None)]
 #[command(version, about, long_about = None)]
 pub struct Cli {
-    //I need a better desc later, this one is clunky
-    #[arg(
-        short,
-        long,
-        default_value = "1",
-        value_name = "Number > 0 and =< 100",
-        allow_negative_numbers = false
-    )]
-    pub difficulty: Option<u8>,
-    //
     #[command(subcommand)]
     pub command: Option<Commands>,
 }
