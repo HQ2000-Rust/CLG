@@ -22,7 +22,6 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
   - help - Print this message or the help of the given subcommand(s)
 
 ### Options
--   -d, --difficulty <Number from 1 to 100>  [default: 1]
 -   -h, --help - Print help
 -   -V, --version - Print version
 
