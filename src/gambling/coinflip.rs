@@ -1,21 +1,20 @@
-use super::utils::{AnimStatus, GambleResult};
-use color_eyre::owo_colors::StylePrefixFormatter;
+use super::utils::{AnimStatus, GambleResult, LastChange};
+use ansi_to_tui::IntoText;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::style::Style;
-use ratatui::widgets::block::Title;
 use ratatui::{
     DefaultTerminal, Frame,
     buffer::Buffer,
     layout::Rect,
     style::Stylize,
     symbols::border,
-    text::{Line, Text},
+    text::Line,
     widgets::{Block, Paragraph, Widget},
 };
 use std::io;
-use std::time::{Duration, Instant};
+use std::time::Duration;
 
-pub fn coinflip(difficulty: u8) -> io::Result<GambleResult> {
+pub fn coinflip() -> io::Result<GambleResult> {
     let mut terminal = ratatui::init();
     let mut app = App::default();
     let result = app.run(&mut terminal)?;
@@ -27,6 +26,8 @@ pub fn coinflip(difficulty: u8) -> io::Result<GambleResult> {
 }
 
 const TIMEOUT: Duration = Duration::from_millis(10);
+const CHANGE_INTERVAL: Duration = Duration::from_millis(500);
+const FINAL_INTERVAL: Duration = Duration::from_millis(1000);
 
 #[derive(Debug, Eq, PartialEq)]
 enum AnimFrame {
@@ -54,40 +55,24 @@ impl AnimFrame {
             AnimFrame::Side2 => AnimFrame::Front,
         }
     }
-    fn stringify(&self) -> &'static str {
+    fn stringify(&self) -> ratatui::text::Text<'static> {
         use super::ascii_art::coin;
+        use ansi_to_tui::IntoText;
         match self {
-            AnimFrame::Side1 | AnimFrame::Side2 => coin::SIDE,
-            AnimFrame::Front => coin::FRONT,
-            AnimFrame::Back => coin::BACK,
+            AnimFrame::Side1 | AnimFrame::Side2 => {
+                coin::SIDE.into_text().expect("correct ANSI color codes")
+            }
+            AnimFrame::Front => coin::TAILS.into_text().expect("correct ANSI color codes"),
+            AnimFrame::Back => coin::HEAD.into_text().expect("correct ANSI color codes"),
         }
     }
 }
 
-#[derive(Debug, Default, Eq, PartialEq)]
-enum CoinFlipStatus {
-    #[default]
-    Uninitialized,
-    Ongoing,
-    Finished,
-}
 
-#[derive(Debug)]
-struct LastChange {
-    inner: Instant,
-}
-impl Default for LastChange {
-    fn default() -> Self {
-        Self {
-            inner: Instant::now(),
-        }
-    }
-}
 
 #[derive(Debug, Default)]
 struct App {
     success: Option<bool>,
-    //cf_status: CoinFlipStatus,
     anim_status: AnimStatus,
     anim_frame: AnimFrame,
     last_change: LastChange,
@@ -105,15 +90,13 @@ impl App {
     }
 
     fn anim(&mut self) {
-        if self.last_change.inner.elapsed() >= Duration::from_millis(500)
-            && self.anim_status.is_ongoing()
-        {
+        if self.last_change.inner.elapsed() >= CHANGE_INTERVAL && self.anim_status.is_ongoing() {
             self.anim_frame.advance();
             if self.anim_frame != AnimFrame::Side1
                 && self.anim_frame != AnimFrame::Side2
                 && fastrand::bool()
             {
-                self.anim_status.finished();
+                self.anim_status.finish();
                 match self.anim_frame {
                     AnimFrame::Front => {
                         self.success = Some(true);
@@ -155,7 +138,7 @@ impl App {
                 if self.anim_status.is_finished() {
                     self.exit();
                 }
-                self.init_coinflip();
+                self.anim_status.start();
             }
             _ => {}
         }
@@ -163,21 +146,17 @@ impl App {
     fn exit(&mut self) {
         self.exit = true;
     }
-
-    fn init_coinflip(&mut self) {
-        self.anim_status.start();
-        //self.cf_status = CoinFlipStatus::Ongoing;
-    }
 }
 
 impl Widget for &App {
     fn render(self, area: Rect, buf: &mut Buffer) {
+
         let coin = if self.anim_status.is_finished()
-            && self.last_change.inner.elapsed() >= Duration::from_millis(1500)
+            && self.last_change.inner.elapsed() >= FINAL_INTERVAL
         {
             match self.anim_frame {
-                AnimFrame::Front => "You win!",
-                AnimFrame::Back => "You lose!",
+                AnimFrame::Front => "You win!".into_text().expect("correct ANSI color codes"),
+                AnimFrame::Back => "You lose!".into_text().expect("correct ANSI color codes"),
                 _ => unreachable!(),
             }
         } else {
@@ -185,7 +164,7 @@ impl Widget for &App {
         };
 
         let enter_text = if self.anim_status.is_finished()
-            && self.last_change.inner.elapsed() >= Duration::from_millis(1500)
+            && self.last_change.inner.elapsed() >= FINAL_INTERVAL
         {
             " Continue ".into()
         } else {
@@ -200,9 +179,10 @@ impl Widget for &App {
             " <Q> ".bold().blue(),
             " <Esc> ".bold().blue(),
         ]);
-        let block = Block::bordered()
+        let block = Block::new()
             .title(title.centered())
             .title_bottom(bottom_text.centered())
+            .border_style(Style::new().blue())
             .border_set(border::THICK);
 
         Paragraph::new(coin)
