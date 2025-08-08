@@ -12,11 +12,7 @@ pub fn run(cli: Cli) -> std::io::Result<()> {
         }
         Some(cmd) => cmd,
     };
-    //own function later, so I can handle the errors here
-    let gambling_result = crate::gambling::rand_gamble_with_difficulty(
-        cli.difficulty
-            .expect("Optional, but it has a default value"),
-    )?;
+    let gambling_result = crate::gambling::rand_gamble()?;
 
     if !gambling_result.is_failure() {
         let output = match cmd {
