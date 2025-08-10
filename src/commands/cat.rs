@@ -1,8 +1,7 @@
 use crossterm::style::Stylize;
-use std::fmt::Error;
-use std::fs::{File, read_dir};
-use std::io::{BufReader, ErrorKind, Read};
-use std::path::{Path, PathBuf};
+use std::fs::File;
+use std::io::{BufReader, Read};
+use std::path::PathBuf;
 
 pub fn cat(file_paths: Vec<PathBuf>) -> Result<Option<String>, std::io::Error> {
     if file_paths.is_empty() {
