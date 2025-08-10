@@ -26,15 +26,16 @@ Partially complies to the [POSIX standard](https://en.wikipedia.org/wiki/POSIX).
 -   -h, --help - Print help
 -   -V, --version - Print version
 
-## Setup
-1. Download the latest release for your OS/arch like windows-x86-64
-> If you don't find your OS and arch in the latest release, compile it (see **Compilation**
+## Setup (Windows only)
+> TL;DR: [SETUP.md](https://github.com/HQ2000-Rust/CLG/blob/main/SETUP.md)
+1. Download the latest release
 2. Put it into your desired directory with sufficient permissions (A "Playground" where you can safely delete or make new files and directories)
 > You can optionally add it to the path, even though I would not recommend it because of its missing suitability
 3. Run the executable `clgambling`
 > 4. **Finished!**
 
 ## Compilation
+> TL;DR: [SETUP.md](https://github.com/HQ2000-Rust/CLG/blob/main/SETUP.md)
 1. Run `cargo install clgambling`
 2. Run it as above stated
 
