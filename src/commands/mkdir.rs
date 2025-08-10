@@ -1,16 +1,8 @@
-use std::fs::{DirEntry, read_dir};
-use std::path::Path;
+use std::fs::create_dir;
 
-pub fn ls() -> Result<Option<String>, std::io::Error> {
-    let mut result = Vec::new();
-    for entry in read_dir(Path::new("."))? {
-        let entry: DirEntry = entry?;
-        result.push(entry.file_name());
+pub fn mkdir(names: Vec<String>) -> std::io::Result<Option<String>> {
+    for name in names {
+        create_dir(name)?;
     }
-    let result = result
-        .iter()
-        .map(|os_string| os_string.to_string_lossy())
-        .collect::<Vec<_>>()
-        .join("   ");
-    Ok(Some(result))
+    Ok(None)
 }
