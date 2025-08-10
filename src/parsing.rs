@@ -48,7 +48,7 @@ pub enum Commands {
     Echo { name: String },
     #[clap(
         about = "display the MIME type of a file",
-        long_about = "display the MIME type of the file at the specified path"
+        long_about = "display the MIME type of the file at the specified path, please quote the input if there are spaces"
     )]
     File { file_path: PathBuf },
     #[clap(
